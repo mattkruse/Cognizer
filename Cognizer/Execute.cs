@@ -13,29 +13,35 @@ namespace Cognizer {
         private static void Main(string[] args) {
             Console.Write("So it begins. \n");
             var web = new HtmlWeb();
-
             for (int i = 1; i < numberOfBooks; i++) {
-                var baseURI = new Uri(baseSite + i + "/");
-                var document = web.Load(baseURI.AbsoluteUri);
-                var xpath = document.DocumentNode.SelectNodes("//a");
-                var book = xpath.Select(link => link.Attributes["href"].Value).FirstOrDefault(path => path.Contains("filepi"));
-                var bookName = xpath.First(link => link.Attributes["href"].Value.Contains("filepi")).InnerText;
+                try {
+                    var baseURI = new Uri(baseSite + i + "/");
+                    var document = web.Load(baseURI.AbsoluteUri);
+                    var xpath = document.DocumentNode.SelectNodes("//a");
+                    var book = xpath.Select(link => link.Attributes["href"].Value).FirstOrDefault(path => path.Contains("filepi"));
+                    var bookName = xpath.First(link => link.Attributes["href"].Value.Contains("filepi")).InnerText;
 
-                using (WebClient client = new WebClient()) {
-                    if (!string.IsNullOrEmpty(book) && !string.IsNullOrEmpty(bookName)) {
-                        bookName = bookName.Replace(':', '-') + ".pdf";
-                        var bookSite = new Uri(book).AbsoluteUri;
-                        client.Headers.Add(HttpRequestHeader.Host, "filepi.com");
-                        client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0");
-                        client.Headers.Add(HttpRequestHeader.Accept, "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-                        client.Headers.Add(HttpRequestHeader.AcceptLanguage, "en-US,en;q=0.5");
-                        client.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
-                        client.Headers.Add(HttpRequestHeader.Referer, baseSite + i);
-                        client.DownloadFile(bookSite, dlDir + bookName);
-                        Console.Write(i + " : Downloaded : " + bookName + "\n");
-                        using (StreamWriter file = new StreamWriter(dlDir + "index.csv", true)) {
-                            file.WriteLine(i + "," + bookName + "," + DateTime.Now);
+                    using (WebClient client = new WebClient()) {
+                        if (!string.IsNullOrEmpty(book) && !string.IsNullOrEmpty(bookName)) {
+                            bookName = bookName.Replace(':', '-') + ".pdf";
+                            var bookSite = new Uri(book).AbsoluteUri;
+                            client.Headers.Add(HttpRequestHeader.Host, "filepi.com");
+                            client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0");
+                            client.Headers.Add(HttpRequestHeader.Accept, "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+                            client.Headers.Add(HttpRequestHeader.AcceptLanguage, "en-US,en;q=0.5");
+                            client.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
+                            client.Headers.Add(HttpRequestHeader.Referer, baseSite + i);
+                            client.DownloadFile(bookSite, dlDir + bookName);
+                            Console.Write(i + " : Downloaded : " + bookName + "\n");
+                            using (StreamWriter file = new StreamWriter(dlDir + "index.csv", true)) {
+                                file.WriteLine(i + "," + (bookName.Contains(",") ? "\"" + bookName + "\"" : bookName) + "," + DateTime.Now);
+                            }
                         }
+                    }
+                }
+                catch (Exception ex) {
+                    using (StreamWriter file = new StreamWriter(dlDir + "index.csv", true)) {
+                        file.WriteLine(i + "," + "Failed: " + ex + "," + DateTime.Now, "*");
                     }
                 }
             }
