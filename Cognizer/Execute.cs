@@ -8,7 +8,7 @@ namespace Cognizer {
     public class IT_eBooks {
         public const string baseSite = "http://it-ebooks.info/book/";
         public const string dlDir = @"I:\Books\";
-        public const int numberOfBooks = 1000; // Max 5686
+        public const int numberOfBooks = 100; // Max 5686
 
         private static void Main(string[] args) {
             Console.Write("So it begins. \n");
@@ -23,7 +23,7 @@ namespace Cognizer {
 
                 using (WebClient client = new WebClient()) {
                     if (!string.IsNullOrEmpty(book) && !string.IsNullOrEmpty(bookName)) {
-                        bookName = bookName + ".pdf";
+                        bookName = bookName.Replace(':', '-') + ".pdf";
                         var bookSite = new Uri(book).AbsoluteUri;
                         client.Headers.Add(HttpRequestHeader.Host, "filepi.com");
                         client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0");
