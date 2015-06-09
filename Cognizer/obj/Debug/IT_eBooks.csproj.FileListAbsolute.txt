@@ -1,0 +1,10 @@
+C:\Users\thorz_000\Documents\Visual Studio 2013\Projects\Cognizer\ConsoleApplication1\bin\Debug\Cognizer.exe.config
+C:\Users\thorz_000\Documents\Visual Studio 2013\Projects\Cognizer\Cognizer\bin\Debug\Cognizer.exe.config
+C:\Users\thorz_000\Documents\Visual Studio 2013\Projects\Cognizer\Cognizer\bin\Debug\Cognizer.exe
+C:\Users\thorz_000\Documents\Visual Studio 2013\Projects\Cognizer\Cognizer\bin\Debug\Cognizer.pdb
+C:\Users\thorz_000\Documents\Visual Studio 2013\Projects\Cognizer\Cognizer\bin\Debug\HtmlAgilityPack.dll
+C:\Users\thorz_000\Documents\Visual Studio 2013\Projects\Cognizer\Cognizer\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\thorz_000\Documents\Visual Studio 2013\Projects\Cognizer\Cognizer\bin\Debug\HtmlAgilityPack.xml
+C:\Users\thorz_000\Documents\Visual Studio 2013\Projects\Cognizer\Cognizer\obj\Debug\IT_eBooks.csprojResolveAssemblyReference.cache
+C:\Users\thorz_000\Documents\Visual Studio 2013\Projects\Cognizer\Cognizer\obj\Debug\Cognizer.exe
+C:\Users\thorz_000\Documents\Visual Studio 2013\Projects\Cognizer\Cognizer\obj\Debug\Cognizer.pdb
