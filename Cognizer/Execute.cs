@@ -11,7 +11,7 @@ namespace Cognizer {
         public const int numberOfBooks = 1000; // Max 5686
 
         private static void Main(string[] args) {
-            Console.Write("So it begins.");
+            Console.Write("So it begins. \n");
             var web = new HtmlWeb();
 
             for (int i = 1; i < numberOfBooks; i++) {
@@ -32,8 +32,8 @@ namespace Cognizer {
                         client.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
                         client.Headers.Add(HttpRequestHeader.Referer, baseSite + i);
                         client.DownloadFile(bookSite, dlDir + bookName);
-                        Console.Write(i + " : Downloaded Book : " + bookName + "\n");
-                        using (StreamWriter file = new StreamWriter(@"I:\Books\index.csv", true)) {
+                        Console.Write(i + " : Downloaded : " + bookName + "\n");
+                        using (StreamWriter file = new StreamWriter(dlDir + "index.csv", true)) {
                             file.WriteLine(i + "," + bookName + "," + DateTime.Now);
                         }
                     }
